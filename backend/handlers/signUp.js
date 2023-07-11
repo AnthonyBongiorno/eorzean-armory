@@ -39,7 +39,7 @@ async function signupHandler(req, res) {
         const id = uuidv4();
 
         // Create a new user document with hashed password and generated ID
-        const user = { _id: id, email, password: hashedPassword, username, characters: [] };
+        const user = { _id: id, email, password: hashedPassword, username, characters: [], gear: [] };
 
         // Insert the user document into the collection
         await db.collection('users').insertOne(user);
