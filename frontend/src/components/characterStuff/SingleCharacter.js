@@ -19,12 +19,17 @@ const SingleCharacter = () => {
       <CharacterBox>
         <CharacterAvatar src={character.avatar} alt="Character Avatar" />
         <CharacterName>{character.characterName}</CharacterName>
-        <p>Server: {character.serverName}</p>
+        <ComingSoon>Server: {character.serverName}</ComingSoon>
+        <ComingSoon>MORE FEATURES COMING SOON</ComingSoon>
         <DeleteCharacter characterId={character.characterId} />
       </CharacterBox>
     </CharacterContainer>
   );
 };
+
+const ComingSoon = styled.p`
+padding: 10px;
+`
 
 const CharacterContainer = styled.div`
   display: flex;

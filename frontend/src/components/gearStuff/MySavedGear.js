@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import DeleteGear from '../gearStuff/GearDelete';
+import ObtainButton from './ObtainedGear';
 
 const GearList = () => {
   const initialData = JSON.parse(localStorage.getItem('user'));
@@ -15,20 +16,40 @@ const GearList = () => {
     localStorage.setItem('user', JSON.stringify(updatedUserData));
   };
 
+  const handleUpdate = (gearId) => {
+    const updatedGearList = userData.gear.map((gear) =>
+      gear.id === gearId ? { ...gear, isObtained: true } : gear
+    );
+    const updatedUserData = { ...userData, gear: updatedGearList };
+    setUserData(updatedUserData);
+    localStorage.setItem('user', JSON.stringify(updatedUserData));
+  };
+
   return (
-    <GearListContainer>
-      <h1>Your Saved Gear</h1>
-      <GearItems>
-        {gearList.map((gear, index) => (
-          <GearItem key={index}>
-            <GearItemImage src={`https://xivapi.com${gear.icon}`} alt={gear.name} />
-            <p>{gear.name}</p>
-            <DeleteGear gearId={gear.id} onDelete={handleDelete} />
-          </GearItem>
-        ))}
-      </GearItems>
-    </GearListContainer>
-  );
+  <GearListContainer>
+    <h1>Your Saved Gear</h1>
+    <GearItems>
+      {gearList.filter(gear => !gear.isObtained).map((gear, index) => (
+        <GearItem key={index}>
+          <GearItemImage src={`https://xivapi.com${gear.icon}`} alt={gear.name} />
+          <p>{gear.name}</p>
+          <ObtainButton gearId={gear.id} userData={userData} setUserData={setUserData} onUpdate={handleUpdate} />
+          <DeleteGear gearId={gear.id} onDelete={handleDelete} />
+        </GearItem>
+      ))}
+    </GearItems>
+    <h2>Your Obtained Gear</h2>
+    <GearItems>
+      {gearList.filter(gear => gear.isObtained).map((gear, index) => (
+        <GearItem key={index}>
+          <GearItemImage src={`https://xivapi.com${gear.icon}`} alt={gear.name} />
+          <p>{gear.name}</p>
+          <DeleteGear gearId={gear.id} onDelete={handleDelete} />
+        </GearItem>
+      ))}
+    </GearItems>
+  </GearListContainer>
+);
 };
 
 const GearListContainer = styled.div`

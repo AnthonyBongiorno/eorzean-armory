@@ -1,11 +1,12 @@
 
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { UserContext } from './UserContext';
 
 const Header = () => {
   const { user, setUser, refetch, setRefetch } = useContext(UserContext);
+  const [isNavVisible, setIsNavVisible] = useState(false);
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
@@ -24,40 +25,40 @@ const Header = () => {
       <HeaderContainer>
         <Logo>Eorzean Armory</Logo>
         <Nav>
-          <NavLinks>
-            <NavLink>
-              <StyledLink to="/">Home</StyledLink>
-            </NavLink>
-            {!user && (
-              <>
-                <NavLink>
-                  <StyledLink to="/signup">Sign Up</StyledLink>
-                </NavLink>
-                <NavLink>
-                  <StyledLink to="/login">Log In</StyledLink>
-                </NavLink>
-              </>
-            )}
-            {user && (
-              <>
-              <NavLink>
-                  <StyledLink to="/mygear">My Gear</StyledLink>
-                </NavLink>
-                <NavLink>
-                  <StyledLink to="/mycharacters">My Characters</StyledLink>
-                </NavLink>
-                <NavLink>
-                  <StyledLink to="/attachcharacter">Attach Character</StyledLink>
-                </NavLink>
-                <NavLink>
-                  <StyledLink to="/gearsearch">Gear Search</StyledLink>
-                </NavLink>
-                <NavLink>
-                  <LogoutButton onClick={handleLogout}>Log Out</LogoutButton>
-                </NavLink>
-              </>
-            )}
-          </NavLinks>
+        <NavLinks>
+  <LinkContainer>
+    <StyledLink to="/">Home</StyledLink>
+  </LinkContainer>
+  {!user && (
+    <>
+      <LinkContainer>
+        <StyledLink to="/signup">Sign Up</StyledLink>
+      </LinkContainer>
+      <LinkContainer>
+        <StyledLink to="/login">Log In</StyledLink>
+      </LinkContainer>
+    </>
+  )}
+  {user && (
+    <>
+      <LinkContainer>
+        <StyledLink to="/mygear">My Gear</StyledLink>
+      </LinkContainer>
+      <LinkContainer>
+        <StyledLink to="/mycharacters">My Characters</StyledLink>
+      </LinkContainer>
+      <LinkContainer>
+        <StyledLink to="/attachcharacter">Attach Character</StyledLink>
+      </LinkContainer>
+      <LinkContainer>
+        <StyledLink to="/gearsearch">Gear Search</StyledLink>
+      </LinkContainer>
+      <LinkContainer>
+        <LogoutButton onClick={handleLogout}>Log Out</LogoutButton>
+      </LinkContainer>
+    </>
+  )}
+</NavLinks>
         </Nav>
         {user && <Username>Welcome User : {user.username}!</Username>}
       </HeaderContainer>
@@ -65,6 +66,35 @@ const Header = () => {
     </>
   );
 };
+
+const LinkContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: white;
+  padding: 0.5rem;
+  background-color: #1d2324;
+  border: black solid 1px;
+  border-radius: 0px; // This will give you sharp corners
+  margin-right: 1rem;
+
+  &:hover {
+    color: var(--teal);
+  }
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+`;
+
+const LogoutButton = styled.button`
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+`;
 
 const PushDownContent = styled.div`
   height: 3rem;
@@ -101,34 +131,6 @@ const NavLinks = styled.ul`
 
 const NavLink = styled.li`
   margin-right: 1rem;
-`;
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: white;
-  padding: 0.5rem;
-  background-color: #1d2324;
-  border-radius: 5px;
-  border: black solid 1px;
-
-  &:hover {
-    color: var(--teal);
-  }
-`;
-
-const LogoutButton = styled.button`
-  text-decoration: none;
-  color: white;
-  padding: 0.5rem;
-  background-color: #1d2324;
-  border-radius: 5px;
-  border: black solid 1px;
-  cursor: pointer;
-
-  &:hover {
-    color: var(--teal);
-  }
-  
 `;
 
 const Username = styled.div`

@@ -91,6 +91,9 @@ const GearSearch = () => {
     );
   };
 
+  const MainContainer = styled.div`
+  max-width: 450px;`
+
 const Container = styled.div`
   background-color: #262a2b;
   color: white;
@@ -98,7 +101,7 @@ const Container = styled.div`
   margin: 50px auto 100px;
   border: black solid 1px;
   border-radius: 5px;
-  max-width: 850px;
+  max-width: 800px;
   display: flex;
   flex-direction: column;
   align-items: center;

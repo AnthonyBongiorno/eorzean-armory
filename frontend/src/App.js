@@ -10,6 +10,7 @@ import MyCharacters from './components/characterStuff/MyCharacters';
 import SingleCharacter from './components/characterStuff/SingleCharacter';
 import GearSearch from './components/gearStuff/UserProfileGearForm';
 import GearList from './components/gearStuff/MySavedGear';
+import Footer from './Footer';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/mygear" element={<GearList />} />
           {/* Add more routes as needed */}
         </Routes>
+      <Footer />
       </Router>
     </>
   );

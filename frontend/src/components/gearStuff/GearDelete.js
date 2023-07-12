@@ -28,14 +28,23 @@ const DeleteGear = ({ gearId, onDelete }) => {
     };
   
     return (
-      <DeleteButton onClick={deleteGear}>
+      <StyledDeleteButton onClick={deleteGear}>
         Delete Gear
-      </DeleteButton>
+      </StyledDeleteButton>
     );
   };
   
-  const DeleteButton = styled.button`
-    /* Styles as needed */
+  const StyledDeleteButton = styled.button`
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  
+    &:hover {
+      background-color: darkred;
+    }
   `;
   
   export default DeleteGear;
