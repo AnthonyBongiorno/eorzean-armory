@@ -47,7 +47,7 @@ async function signupHandler(req, res) {
         // Close the MongoDB connection
         client.close();
 
-        return res.status(201).json({ message: 'User registered successfully' });
+        return res.status(201).json({ user, message: 'User registered successfully' });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ error: 'Server error' });

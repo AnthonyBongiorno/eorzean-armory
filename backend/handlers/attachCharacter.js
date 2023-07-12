@@ -38,11 +38,11 @@ async function attachCharacterHandler(req, res) {
     const character = characterSearchResults.Results[0];
     const characterId = character.ID;
     const avatar = character.Avatar;
-
+    const newCharacter =  { characterId, characterName, serverName, avatar, notes : [] }
     // Find the user by ID and update the characters array with the new character details
     const result = await db.collection('users').updateOne(
       { _id: userId },
-      { $addToSet: { characters: { characterId, characterName, serverName, avatar } } }
+      { $addToSet: { characters: newCharacter } }
     );
 
     // Add the character name and server combination to the claimedID collection
@@ -54,7 +54,7 @@ async function attachCharacterHandler(req, res) {
       return res.status(400).json({ error: 'Failed to attach character' });
     }
 
-    return res.status(200).json({ message: 'Character attached successfully' });
+    return res.status(200).json({ message: 'Character attached successfully', newCharacter });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: 'Server error' });
