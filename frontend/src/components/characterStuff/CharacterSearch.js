@@ -199,7 +199,11 @@ const CharacterSearch = () => {
       border: black solid 1px;
       border-radius: 5px;
       max-width: 500px;
-      
+      display: row;
+      justify-content: center;
+      align-items: center;
+      border: black solid 1px ;
+      border-radius: 10px;
     `;
     
     const Form = styled.form`

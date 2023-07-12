@@ -54,6 +54,9 @@ export default createGlobalStyle`
     }
     body {
         line-height: 1;
+        background-image: url(https://r4.wallpaperflare.com/wallpaper/958/1006/340/final-fantasy-xiv-a-realm-reborn-final-fantasy-xiv-video-games-video-game-art-games-art-hd-wallpaper-9930e88d312acd0bf697586f100176bd.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
     }
     ol, ul {
         list-style: none;

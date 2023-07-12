@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import About from './components/LandingPage/About';
-import CharacterSearch from './components/LandingPage/CharacterSearch';
+import CharacterSearch from './components/characterStuff/CharacterSearch';
 
 const Home = () => {
   return (
@@ -16,10 +16,15 @@ const Home = () => {
 }
 
 const Container = styled.div`
-  background-color: var(--navy-blue);
   color: white;
   padding: 1rem;
   text-align: center;
+  max-width: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 100px;
+  border-radius: 10px;
 `;
 
 const ContentContainer = styled.div`

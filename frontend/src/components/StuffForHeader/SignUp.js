@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { styled } from 'styled-components';
+import { UserContext } from '../../UserContext';
+import { useNavigate } from 'react-router-dom';
 
 
 const SignUp = () => {
@@ -7,10 +9,12 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [error, setError] = useState(null);
+  const { refetch, setRefetch } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
       const response = await fetch('/signup', {
         method: 'POST',
@@ -23,14 +27,18 @@ const SignUp = () => {
           username,
         }),
       });
-
+  
       if (response.ok) {
         // Registration successful
+        const data = await response.json();
+        localStorage.setItem('user', JSON.stringify(data.user));
         setEmail('');
         setPassword('');
         setUsername('');
         setError(null);
+        setRefetch(!refetch)
         alert('User registered successfully');
+        navigate('/');
       } else if (response.status === 400) {
         // User already exists
         const data = await response.json();
@@ -118,5 +126,6 @@ const Button = styled.button`
 const Error = styled.p`
   color: var(--error-color);
 `;
+
 
 export default SignUp;
