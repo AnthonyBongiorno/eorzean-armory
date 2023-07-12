@@ -365,3 +365,119 @@ Content-Type: application/json
 
 - If the user with the specified `userId` cannot be found, a status code of 404 is returned, along with a JSON object with an `error` property of `'User not found'`.
 - If a server error occurs, a status code of 500 is returned, along with a JSON object with an `error` property of `'Server error'`.
+
+# DELETE /characters/delete
+
+This endpoint is responsible for deleting a character from a user's account.
+
+## Request
+
+| Name           | Type   | In     | Description                                 |
+|----------------|--------|--------|---------------------------------------------|
+| `characterName`| String | Body   | The name of the character to be deleted     |
+| `userId`       | String | Body   | The ID of the user from whom to delete the character |
+
+```json
+{
+  "characterName": "CharacterName",
+  "userId": "UserID"
+}
+```
+Response
+Success
+Status Code: 200 OK
+
+Name	Type	Description
+message	String	Confirmation that the character was successfully detached
+```json
+{
+  "message": "Character detached successfully"
+}
+```
+Failure
+When the operation fails to delete the character:
+
+Status Code: 400 Bad Request
+
+```json
+{
+  "error": "Failed to detach character"
+}
+```
+
+When there is a server error:
+
+Status Code: 500 Internal Server Error
+
+```json
+{
+  "error": "Server error"
+}
+```
+
+Notes
+This endpoint performs two database operations:
+
+Removes the character from the user's character array in the 'users' collection.
+Deletes the character name from the 'claimedID' collection.
+
+Please replace `"CharacterName"` and `"UserID"` with the appropriate value
+
+Delete Gear Item
+Deletes a specified gear item from a user's gear array.
+
+## ENDPOINT
+
+### /items/delete
+
+Method:
+
+### DELETE
+
+```json
+{
+  "gearId": "<ID_OF_GEAR_ITEM_TO_DELETE>",
+  "userId": "<ID_OF_USER_TO_DELETE_GEAR_FROM>"
+}
+``````
+Success Response:
+
+Code: 200
+Content:
+```json
+{
+  "message": "Gear deleted successfully"
+}
+```
+Error Responses:
+
+Code: 400
+Content:
+
+```json
+{
+  "error": "Failed to delete gear"
+}
+```
+Code: 500
+Content:
+
+```json
+{
+  "error": "Server error"
+}
+```
+Sample Call:
+
+```javascript
+fetch('/api/gear', {
+  method: 'DELETE',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    gearId: '37932',
+    userId: '8c585bc9-b5e0-4902-bd96-cbceda341f43',
+  }),
+});
+```
