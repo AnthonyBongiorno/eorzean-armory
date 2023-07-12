@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import DeleteCharacter from '../characterStuff/CharacterDelete';
 
 const SingleCharacter = () => {
   const { characterId } = useParams();
@@ -19,7 +20,7 @@ const SingleCharacter = () => {
         <CharacterAvatar src={character.avatar} alt="Character Avatar" />
         <CharacterName>{character.characterName}</CharacterName>
         <p>Server: {character.serverName}</p>
-        {/* Display other character details */}
+        <DeleteCharacter characterId={character.characterId} />
       </CharacterBox>
     </CharacterContainer>
   );

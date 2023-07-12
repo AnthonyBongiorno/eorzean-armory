@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import DeleteCharacter from '../characterStuff/CharacterDelete';
 
 const MyCharacters = () => {
   const userData = JSON.parse(localStorage.getItem('user'));
@@ -11,14 +12,14 @@ const MyCharacters = () => {
       <CharacterList>
         <Grid>
           {characters.map((character, index) => (
-            <Link key={index} to={`/characters/${character.characterId}`}>
+            <CharacterLink key={index} to={`/characters/${character.characterId}`}>
               <CharacterBox>
                 <CharacterAvatar src={character.avatar} alt="Character Avatar" />
                 <CharacterName>{character.characterName}</CharacterName>
                 <p>Server: {character.serverName}</p>
-                {/* Display other character details */}
+                <DeleteCharacter characterId={character.characterId} />
               </CharacterBox>
-            </Link>
+            </CharacterLink>
           ))}
         </Grid>
       </CharacterList>
@@ -56,6 +57,7 @@ const CharacterBox = styled.div`
   flex-direction: column;
   align-items: center;
   width: 250px;
+  border: black solid 1px;
 `;
 
 const CharacterAvatar = styled.img`

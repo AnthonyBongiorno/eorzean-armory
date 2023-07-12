@@ -40,6 +40,9 @@ const Header = () => {
             )}
             {user && (
               <>
+              <NavLink>
+                  <StyledLink to="/mygear">My Gear</StyledLink>
+                </NavLink>
                 <NavLink>
                   <StyledLink to="/mycharacters">My Characters</StyledLink>
                 </NavLink>
