@@ -320,3 +320,48 @@ Example:
   ]
 }
 ```
+
+# `POST /items/post/:userId/`
+
+This endpoint is used to add gear to a user's inventory. 
+
+## URL Parameters
+
+- `userId` - The ID of the user to whom the gear will be added. This parameter is required.
+
+## Body Parameters
+
+The body of the request should be a JSON object with the following properties:
+
+- `id` - The ID of the gear to add. This parameter is required.
+- `icon` - The icon URL of the gear to add. This parameter is required.
+- `name` - The name of the gear to add. This parameter is required.
+
+## Post gear
+
+POST /items/post/EX:5fcd647a5e922800177b7c85
+Content-Type: application/json
+```json
+
+{
+"id": "10",
+"icon": "/i/052000/052601.png",
+"name": "Weathered Shortbow"
+}
+```
+
+## Responses
+
+
+200 OK
+Content-Type: application/json
+```json
+{
+"message": "Gear added to user successfully"
+}
+```
+
+## Error Handling
+
+- If the user with the specified `userId` cannot be found, a status code of 404 is returned, along with a JSON object with an `error` property of `'User not found'`.
+- If a server error occurs, a status code of 500 is returned, along with a JSON object with an `error` property of `'Server error'`.
