@@ -9,6 +9,7 @@ const{ deleteCharacterHandler } = require('../handlers/deleteCharacterFromUser')
 const{ getProfileCharacters } = require('../handlers/getCharacters');
 const { addGearToUserHandler } = require('../handlers/gearPost');
 const { deleteGearHandler } = require(`../handlers/gearDelete`);
+const { updateGearHandler } = require('../handlers/gearUpdateObtained');
 //Routes for handlers
 router.post("/signup", signupHandler);
 router.post("/signin", loginHandler);
@@ -19,4 +20,5 @@ router.get('/items', searchItems);
 router.delete('/characters/delete', deleteCharacterHandler);
 router.post('/items/post/:userId/', addGearToUserHandler);
 router.delete('/items/delete', deleteGearHandler);
+router.put('/gear/update', updateGearHandler);
 module.exports = router;
